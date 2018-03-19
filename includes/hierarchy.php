@@ -5,7 +5,7 @@
 class QBPPC_Hierarchy {
 
 	/**
-	 * Character for specifying hierarchy indentation 
+	 * Character for specifying hierarchy indentation
 	 *
 	 * @access protected
 	 *
@@ -113,11 +113,17 @@ class QBPPC_Hierarchy {
 				$parent = '';
 			}
 
+			//spilt title by | character
+			list ($title, $content) = explode('|', $title);
+			$title = trim($title);
+			$content = trim($content);
+
 			// build & add parsed hierarchy item
 			$hierarchy_item = array(
 				'parent' => $parent,
 				'depth' => $depth,
 				'title' => $title,
+				'content' => $content ? $content : '',
 			);
 			$hierarchy[] = $hierarchy_item;
 

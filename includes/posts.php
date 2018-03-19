@@ -38,7 +38,7 @@ class QBPPC_Posts {
 	public static function process_hierarchy($hierarchy = array(), $post_type = 'post', $post_status = 'publish', $parent = 0) {
 		$total = 0;
 		foreach ($hierarchy as $hierarchy_entry) {
-			$id = self::insert($post_type, $hierarchy_entry['title'], $post_status, $parent);
+			$id = self::insert($post_type, $hierarchy_entry['title'], $post_status, $parent, $hierarchy_entry['content']);
 			$total++;
 
 			if ( !empty($hierarchy_entry['children']) ) {
@@ -61,11 +61,11 @@ class QBPPC_Posts {
 	 * @param int $parent ID of the parent post.
 	 * @return int $id The ID of the inserted post.
 	 */
-	public static function insert($post_type, $title, $post_status = 'publish', $parent = 0) {
+	public static function insert($post_type, $title, $post_status = 'publish', $parent = 0, $content = '') {
 		$id = wp_insert_post(array(
 			'post_type' => $post_type,
 			'post_title' => $title,
-			'post_content' => '',
+			'post_content' => $content,
 			'post_parent' => $parent,
 			'post_status' => $post_status,
 		));
